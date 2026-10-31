@@ -32,14 +32,21 @@ L’architecture CNN utilise trois couches convolutionnelles (32, 64 et 128 cana
 ### Faster R-CNN
 
 Résultats lus dans `notebooks/Faster_RCNN_MNIST.ipynb` : entraînement distribué DDP sur deux GPU Tesla T4, modèle Faster R-CNN ResNet50-FPN, images 64x64, 59 000 images d'entraînement, 1 000 de validation et 10 000 de test. Après 8 époques (79,9 minutes), l'accuracy test est 99,22 % et le F1 macro 99,21 %. Le notebook ne rapporte pas de loss test; les losses train/validation sont affichées par époque. La définition des boîtes pour adapter MNIST à la détection est documentée dans le notebook.
+### AlexNet fine-tuné
+
+Résultats du notebook `notebooks/AlexNet_FineTuning_MNIST.ipynb` : accuracy test **99,25 %**, F1 macro **99,24 %**, loss test **0,0236** et durée **3,8 min** (10 époques, entraînement distribué sur deux Tesla T4).
+
+### VGG16 fine-tuné
+
+Résultats du notebook `notebooks/VGG16_FineTuning_MNIST.ipynb` : accuracy test **99,49 %**, F1 macro **99,49 %**, loss test **0,0226** et durée **6,0 min** (early stopping après 9 époques, entraînement distribué sur deux Tesla T4).
 ## État du travail
 
 | Modèle / livrable | État | Fichier |
 |---|---|---|
 | CNN | Résultats disponibles | [`notebooks/MNIST_CNN_Result.ipynb`](notebooks/MNIST_CNN_Result.ipynb) |
 | Faster R-CNN | Résultats disponibles | [`notebooks/Faster_RCNN_MNIST.ipynb`](notebooks/Faster_RCNN_MNIST.ipynb) |
-| VGG16 fine-tuning | À réaliser | [`notebooks/VGG16_FineTuning_MNIST.ipynb`](notebooks/VGG16_FineTuning_MNIST.ipynb) |
-| AlexNet fine-tuning | À réaliser | [`notebooks/AlexNet_FineTuning_MNIST.ipynb`](notebooks/AlexNet_FineTuning_MNIST.ipynb) |
+| VGG16 fine-tuné | Résultats disponibles | [`notebooks/VGG16_FineTuning_MNIST.ipynb`](notebooks/VGG16_FineTuning_MNIST.ipynb) |
+| AlexNet fine-tuné | Résultats disponibles | [`notebooks/AlexNet_FineTuning_MNIST.ipynb`](notebooks/AlexNet_FineTuning_MNIST.ipynb) |
 | ViT depuis zéro | À réaliser | [`notebooks/ViT_MNIST.ipynb`](notebooks/ViT_MNIST.ipynb) |
 | Comparaison et synthèse finale | À compléter après les expériences | Cette section |
 
@@ -49,8 +56,8 @@ Résultats lus dans `notebooks/Faster_RCNN_MNIST.ipynb` : entraînement distribu
 |---|---:|---:|---:|---:|---|
 | CNN | 0,9956 | 0,9956 | 0,0125 | 339,7 | Tesla T4 |
 | Faster R-CNN | 0,9922 | 0,9921 | Non rapportée | 4 794 s (79,9 min) | 2 Tesla T4, 8 époques; adaptation MNIST détection |
-| VGG16 fine-tuné | — | — | — | — | À compléter |
-| AlexNet fine-tuné | — | — | — | — | À compléter |
+| VGG16 fine-tuné | 0,9949 | 0,9949 | 0,0226 | 360 | 2 Tesla T4; early stopping à 9 époques |
+| AlexNet fine-tuné | 0,9925 | 0,9924 | 0,0236 | 228 | 2 Tesla T4; 10 époques |
 | ViT | — | — | — | — | À compléter |
 
 ## Interprétation et synthèse personnelle
