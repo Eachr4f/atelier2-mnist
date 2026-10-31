@@ -12,7 +12,9 @@ Dépôt de travail pour l’atelier de Deep Learning (PyTorch). Les expériences
 - **Synthèse :** rédiger les apprentissages et la conclusion dans ce README.
 - **Remise :** pousser le travail sur GitHub/GitLab et garder un bref rapport dans le README.
 
-## Résultat déjà disponible — CNN
+## Résultats déjà disponibles
+
+### CNN
 
 Résultats lus dans `notebooks/MNIST_CNN_Result.ipynb` (exécution Kaggle, GPU Tesla T4, jeu de test de 10 000 images) :
 
@@ -27,12 +29,15 @@ Résultats lus dans `notebooks/MNIST_CNN_Result.ipynb` (exécution Kaggle, GPU T
 
 L’architecture CNN utilise trois couches convolutionnelles (32, 64 et 128 canaux), BatchNorm, ReLU, max pooling, dropout et deux couches linéaires. Le notebook sépare 54 000 images pour l’entraînement, 6 000 pour la validation et utilise les 10 000 images de test à la fin. Il inclut les courbes, le rapport par classe et des exemples de prédictions. Les détails par classe sont dans les sorties du notebook.
 
+### Faster R-CNN
+
+Résultats lus dans `notebooks/Faster_RCNN_MNIST.ipynb` : entraînement distribué DDP sur deux GPU Tesla T4, modèle Faster R-CNN ResNet50-FPN, images 64x64, 59 000 images d'entraînement, 1 000 de validation et 10 000 de test. Après 8 époques (79,9 minutes), l'accuracy test est 99,22 % et le F1 macro 99,21 %. Le notebook ne rapporte pas de loss test; les losses train/validation sont affichées par époque. La définition des boîtes pour adapter MNIST à la détection est documentée dans le notebook.
 ## État du travail
 
 | Modèle / livrable | État | Fichier |
 |---|---|---|
 | CNN | Résultats disponibles | [`notebooks/MNIST_CNN_Result.ipynb`](notebooks/MNIST_CNN_Result.ipynb) |
-| Faster R-CNN | À réaliser | [`notebooks/Faster_RCNN_MNIST.ipynb`](notebooks/Faster_RCNN_MNIST.ipynb) |
+| Faster R-CNN | Résultats disponibles | [`notebooks/Faster_RCNN_MNIST.ipynb`](notebooks/Faster_RCNN_MNIST.ipynb) |
 | VGG16 fine-tuning | À réaliser | [`notebooks/VGG16_FineTuning_MNIST.ipynb`](notebooks/VGG16_FineTuning_MNIST.ipynb) |
 | AlexNet fine-tuning | À réaliser | [`notebooks/AlexNet_FineTuning_MNIST.ipynb`](notebooks/AlexNet_FineTuning_MNIST.ipynb) |
 | ViT depuis zéro | À réaliser | [`notebooks/ViT_MNIST.ipynb`](notebooks/ViT_MNIST.ipynb) |
@@ -43,7 +48,7 @@ L’architecture CNN utilise trois couches convolutionnelles (32, 64 et 128 cana
 | Modèle | Accuracy test | F1 macro | Loss test | Temps (s) | GPU / remarques |
 |---|---:|---:|---:|---:|---|
 | CNN | 0,9956 | 0,9956 | 0,0125 | 339,7 | Tesla T4 |
-| Faster R-CNN | — | — | — | — | À compléter; préciser la définition des boîtes |
+| Faster R-CNN | 0,9922 | 0,9921 | Non rapportée | 4 794 s (79,9 min) | 2 Tesla T4, 8 époques; adaptation MNIST détection |
 | VGG16 fine-tuné | — | — | — | — | À compléter |
 | AlexNet fine-tuné | — | — | — | — | À compléter |
 | ViT | — | — | — | — | À compléter |
