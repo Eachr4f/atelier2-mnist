@@ -43,7 +43,7 @@ Résultats du notebook `notebooks/VGG16_FineTuning_MNIST.ipynb` : accuracy test 
 
 ### Vision Transformer (ViT)
 
-Résultats du notebook `notebooks/ViT_MNIST.ipynb` : accuracy test **87,92 %** et loss test **0,37** après 5 époques, sur deux GPU Tesla T4 avec DataParallel. Le notebook ne rapporte pas le F1 macro ni la durée totale d'entraînement.
+Résultats du notebook `notebooks/ViT_MNIST.ipynb` : accuracy test **87,92 %**, loss test **0,3746** et durée **62,6 s** après 5 époques, sur deux GPU Tesla T4 avec DataParallel. Le notebook ne rapporte pas le F1 macro.
 
 ## État du travail
 
@@ -64,13 +64,13 @@ Résultats du notebook `notebooks/ViT_MNIST.ipynb` : accuracy test **87,92 %** e
 | Faster R-CNN | 0,9922 | 0,9921 | Non rapportée | 4 794 s (79,9 min) | 2 Tesla T4, 8 époques; adaptation MNIST détection |
 | VGG16 fine-tuné | 0,9949 | 0,9949 | 0,0226 | 360 | 2 Tesla T4; early stopping à 9 époques |
 | AlexNet fine-tuné | 0,9925 | 0,9924 | 0,0236 | 228 | 2 Tesla T4; 10 époques |
-| ViT | 0,8792 | Non rapporté | 0,37 | Non rapporté | 2 Tesla T4; DataParallel; 5 époques |
+| ViT | 0,8792 | Non rapporté | 0,3746 | 62,6 | 2 Tesla T4; DataParallel; 5 époques |
 
 ## Interprétation et synthèse personnelle
 
 Sur les exécutions disponibles, le CNN obtient la meilleure accuracy (99,56 %) et la meilleure loss rapportée (0,0125). VGG16 suit avec 99,49 % d’accuracy et 99,49 % de F1 macro. AlexNet atteint 99,25 % d’accuracy, et Faster R-CNN 99,22 %. Le ViT atteint 87,92 % après cinq époques : ce résultat est nettement inférieur dans cette configuration et ne permet pas de conclure que les ViT sont généralement moins performants; il suggère plutôt que cette implémentation ou son entraînement demande davantage d’ajustements ou d’époques.
 
-Les durées rapportées ne sont pas directement comparables : CNN a été entraîné sur une Tesla T4 pendant 339,7 s, tandis que Faster R-CNN, AlexNet et VGG16 ont utilisé deux Tesla T4 avec des configurations et des procédures différentes. Le ViT ne rapporte pas sa durée. Le F1 du ViT n’est pas fourni, et Faster R-CNN ne rapporte pas de loss test.
+Les durées rapportées ne sont pas directement comparables : CNN a été entraîné sur une Tesla T4 pendant 339,7 s, tandis que Faster R-CNN, AlexNet et VGG16 ont utilisé deux Tesla T4 avec des configurations et des procédures différentes. Le F1 du ViT n’est pas fourni, et Faster R-CNN ne rapporte pas de loss test.
 
 **Limite de protocole à prendre en compte :** le notebook ViT affiche la loss du jeu de test à chaque époque, alors que le test devrait idéalement rester réservé à l’évaluation finale. Il faut donc éviter de présenter ce résultat comme une comparaison parfaitement contrôlée; pour une comparaison plus rigoureuse, choisir les réglages à partir d’un jeu de validation distinct, puis évaluer le test une seule fois.
 
