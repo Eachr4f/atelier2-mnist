@@ -74,11 +74,17 @@ Les durées rapportées ne sont pas directement comparables : CNN a été entra�
 
 **Limite de protocole à prendre en compte :** le notebook ViT affiche la loss du jeu de test à chaque époque, alors que le test devrait idéalement rester réservé à l’évaluation finale. Il faut donc éviter de présenter ce résultat comme une comparaison parfaitement contrôlée; pour une comparaison plus rigoureuse, choisir les réglages à partir d’un jeu de validation distinct, puis évaluer le test une seule fois.
 
-**Synthèse personnelle à compléter avec tes mots :**
+### Ce que j’ai appris
 
-- Ce que j’ai appris sur les CNN, les modèles pré-entraînés, la détection et les Transformers : …
-- Le principal compromis entre performance, temps de calcul et complexité que j’ai observé : …
-- Les difficultés rencontrées et les améliorations que je proposerais : …
+J’ai appris qu’un CNN est bien adapté à la classification d’images comme MNIST : il apprend progressivement les motifs visuels utiles et a obtenu ici le meilleur résultat, avec 99,56 % d’accuracy. Le fine-tuning de modèles pré-entraînés peut aussi donner d’excellents résultats : VGG16 atteint 99,49 % et AlexNet 99,25 %. Faster R-CNN est conçu pour localiser des objets en plus de les classer; son utilisation sur MNIST demande donc de définir des boîtes autour des chiffres. Enfin, un ViT traite l’image en patches et utilise l’attention; dans cette expérience, son résultat après cinq époques reste plus faible, ce qui montre que l’architecture et les réglages d’entraînement comptent beaucoup.
+
+### Compromis observé
+
+Sur ces essais, VGG16 est proche du CNN en accuracy, mais a pris 6 minutes contre 339,7 secondes pour le CNN; AlexNet a pris 3,8 minutes et Faster R-CNN environ 79,9 minutes. Ces temps ne constituent pas une comparaison parfaitement équitable, car les expériences n’utilisent pas toutes le même nombre de GPU ni les mêmes configurations. Les modèles plus complexes ou adaptés à la détection peuvent coûter davantage en calcul sans améliorer la classification de chiffres simples.
+
+### Difficultés et améliorations proposées
+
+L’adaptation de Faster R-CNN est délicate parce que les données MNIST ne fournissent pas de boîtes de détection. Le ViT n’a été entraîné que cinq époques et son notebook suit la loss du test à chaque époque; pour une comparaison plus rigoureuse, je séparerais un jeu de validation pour suivre l’entraînement, réserverais le test à une seule évaluation finale, puis ajusterais les hyperparamètres et prolongerais l’entraînement du ViT. Je rapporterais aussi les mêmes métriques pour chaque modèle et utiliserais une configuration GPU comparable.
 
 ## Exécution
 
