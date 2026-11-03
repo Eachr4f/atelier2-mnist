@@ -74,17 +74,19 @@ Les durées rapportées ne sont pas directement comparables : CNN a été entra�
 
 **Limite de protocole à prendre en compte :** le notebook ViT affiche la loss du jeu de test à chaque époque, alors que le test devrait idéalement rester réservé à l’évaluation finale. Il faut donc éviter de présenter ce résultat comme une comparaison parfaitement contrôlée; pour une comparaison plus rigoureuse, choisir les réglages à partir d’un jeu de validation distinct, puis évaluer le test une seule fois.
 
-### Ce que j’ai appris
+### Synthèse personnelle
 
-J’ai appris qu’un CNN est bien adapté à la classification d’images comme MNIST : il apprend progressivement les motifs visuels utiles et a obtenu ici le meilleur résultat, avec 99,56 % d’accuracy. Le fine-tuning de modèles pré-entraînés peut aussi donner d’excellents résultats : VGG16 atteint 99,49 % et AlexNet 99,25 %. Faster R-CNN est conçu pour localiser des objets en plus de les classer; son utilisation sur MNIST demande donc de définir des boîtes autour des chiffres. Enfin, un ViT traite l’image en patches et utilise l’attention; dans cette expérience, son résultat après cinq époques reste plus faible, ce qui montre que l’architecture et les réglages d’entraînement comptent beaucoup.
+1. **Ce que j’ai appris sur les CNN, les modèles pré-entraînés, la détection et les Transformers :**
 
-### Compromis observé
+   J’ai appris qu’un CNN extrait progressivement les caractéristiques d’une image grâce aux convolutions et aux opérations de pooling. Les modèles pré-entraînés comme VGG16 et AlexNet peuvent réutiliser des caractéristiques déjà apprises, puis être adaptés à un nouveau jeu de données par fine-tuning. Faster R-CNN sert à détecter et localiser des objets, ce qui est plus complexe qu’une simple classification. Le Vision Transformer divise l’image en patches et utilise l’attention pour apprendre les relations entre ces parties.
 
-Sur ces essais, VGG16 est proche du CNN en accuracy, mais a pris 6 minutes contre 339,7 secondes pour le CNN; AlexNet a pris 3,8 minutes et Faster R-CNN environ 79,9 minutes. Ces temps ne constituent pas une comparaison parfaitement équitable, car les expériences n’utilisent pas toutes le même nombre de GPU ni les mêmes configurations. Les modèles plus complexes ou adaptés à la détection peuvent coûter davantage en calcul sans améliorer la classification de chiffres simples.
+2. **Le principal compromis entre performance, temps de calcul et complexité que j’ai observé :**
 
-### Difficultés et améliorations proposées
+   Les modèles plus complexes demandent davantage de calcul et de temps d’entraînement. Faster R-CNN est conçu pour la détection, mais il est lourd à appliquer à MNIST, où l’objectif est seulement de reconnaître un chiffre. Les modèles pré-entraînés peuvent obtenir de bons résultats, tandis que le ViT étudié reste plus exigeant et a obtenu **87,92 % d’accuracy** et un **F1 macro de 0,8772** après cinq époques. Ce résultat dépend de la petite architecture utilisée et du protocole d’entraînement.
 
-L’adaptation de Faster R-CNN est délicate parce que les données MNIST ne fournissent pas de boîtes de détection. Le ViT n’a été entraîné que cinq époques et son notebook suit la loss du test à chaque époque; pour une comparaison plus rigoureuse, je séparerais un jeu de validation pour suivre l’entraînement, réserverais le test à une seule évaluation finale, puis ajusterais les hyperparamètres et prolongerais l’entraînement du ViT. Je rapporterais aussi les mêmes métriques pour chaque modèle et utiliserais une configuration GPU comparable.
+3. **Les difficultés rencontrées et les améliorations que je proposerais :**
+
+   J’ai rencontré des difficultés liées à la configuration du GPU, au temps d’entraînement de certains modèles et à l’adaptation des architectures à MNIST. Pour améliorer l’expérience, je proposerais de comparer les modèles avec les mêmes séparations de données, d’utiliser un ensemble de validation pour choisir les hyperparamètres et d’ajouter des courbes d’apprentissage. Pour le ViT, je pourrais aussi prolonger l’entraînement et analyser les erreurs par classe, en veillant à ne pas utiliser les résultats du jeu de test pour régler le modèle.
 
 ## Exécution
 
